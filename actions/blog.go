@@ -6,8 +6,8 @@ import (
 )
 
 type Blog struct {
-	// Author_name string `json:"name"`
-	// Author_title string `json:"title"`
+	AuthorName string `json:"name"`
+	AuthorTitle string `json:"title"`
 	ID uuid.UUID `json:"id"`
 }
 
@@ -32,7 +32,8 @@ func (br BlogResource) List(c buffalo.Context) error {
 func (br BlogResource) Create(c buffalo.Context) error {
 	// new Blog
 	blog := &Blog{
-		
+		AuthorName:"",
+		AuthorTitle:"",
 		ID: uuid.NewV4(),
 	}
 	// add in database
