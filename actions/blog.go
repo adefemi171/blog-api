@@ -30,9 +30,9 @@ func (br BlogResource) List(c buffalo.Context) error {
 
 // Create Blog.
 func (br BlogResource) Create(c buffalo.Context) error {
-	// new User
+	// new Blog
 	blog := &Blog{
-		// on génère un nouvel id
+		
 		ID: uuid.NewV4(),
 	}
 	// add in database
@@ -41,7 +41,7 @@ func (br BlogResource) Create(c buffalo.Context) error {
 	return c.Render(201, r.JSON(blog))
 }
 
-// To display a specific user
+// To display a specific blog
 func (br BlogResource) Show(c buffalo.Context) error {
 	// get id and format to uuid
 	id, err := uuid.FromString(c.Param("id"))
