@@ -30,6 +30,9 @@ var app *buffalo.App
 // `ServeFiles` is a CATCH-ALL route, so it should always be
 // placed last in the route declarations, as it will prevent routes
 // declared after it to never be called.
+
+
+
 func App() *buffalo.App {
 	if app == nil {
 		app = buffalo.New(buffalo.Options{
@@ -41,6 +44,12 @@ func App() *buffalo.App {
 			SessionName: "_blog_session",
 		})
 
+		// /api/v1 prefix for new routes
+		g := app.Group("/api/v1")
+
+		// new BlogResource
+		br := &BlogResource{}
+
 		// Automatically redirect to SSL
 		app.Use(forceSSL())
 
@@ -51,6 +60,13 @@ func App() *buffalo.App {
 		app.Use(contenttype.Set("application/json"))
 
 		app.GET("/", HomeHandler)
+		// app.GET("/blog", BlogList)
+		// app.GET("/blog/{id:[0-9]+}", BlogGetByID)
+		g.GET("/blog", br.List)
+		g.POST("/blog", br.Create)
+		g.GET("/blog/{id}", br.Show)
+		// app.GET("/blog/get_by_id", BlogGetByID)
+		
 	}
 
 	return app
