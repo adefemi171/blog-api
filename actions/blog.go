@@ -1,21 +1,17 @@
 package actions
 
 import (
-    
 	"github.com/gobuffalo/buffalo"
-	"github.com/satori/go.uuid"
-	
-	
+	uuid "github.com/satori/go.uuid"
 )
 
-
-type Blog struct{
+type Blog struct {
 	// Author_name string `json:"name"`
 	// Author_title string `json:"title"`
-    ID uuid.UUID `json:"id"`
+	ID uuid.UUID `json:"id"`
 }
 
-var db = make(map[uuid.UUID]actions.Blog)
+var db = make(map[uuid.UUID]Blog)
 
 // var blogs = []Blog {
 // 	Blog {Author_name: "Henry James", Author_title: "Daisy Miller", ID: 1},
@@ -35,7 +31,7 @@ func (br BlogResource) List(c buffalo.Context) error {
 // Create Blog.
 func (br BlogResource) Create(c buffalo.Context) error {
 	// new User
-	blog := &actions.Blog {
+	blog := &Blog{
 		// on génère un nouvel id
 		ID: uuid.NewV4(),
 	}
@@ -76,4 +72,3 @@ func (br BlogResource) Show(c buffalo.Context) error {
 //     }
 // 	return c.Render(http.StatusNotFound, nil)
 // }
-
